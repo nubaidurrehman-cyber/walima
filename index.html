@@ -135,9 +135,6 @@ body.ready #music{opacity:1;pointer-events:auto}
 #music.off .bars rect{animation:none;transform:scaleY(.25)}
 @keyframes eq{50%{transform:scaleY(.3)}}
 
-#ytbox{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;width:168px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 8px 20px -6px rgba(0,0,0,.3);background:#000;opacity:0;pointer-events:none;transition:opacity .6s}
-body.ready #ytbox{opacity:1;pointer-events:auto}
-#ytbox iframe{width:100%;height:100%;border:0;display:block}
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none}.sheet::before{--a:360deg;transition:none}
   .seal::after,.seal::before,.tap,.scrollcue svg,#music .bars rect{animation:none}#petals{display:none}html{scroll-behavior:auto}
@@ -244,7 +241,6 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
   </div>
 </div>
 
-<div id="ytbox"><div id="ytp"></div></div>
 <canvas id="petals" aria-hidden="true"></canvas>
 <button id="music" aria-label="Pause nasheed"><svg viewBox="0 0 20 20" class="bars"><rect x="2" y="4" width="3" height="14"/><rect x="8.5" y="2" width="3" height="16"/><rect x="15" y="6" width="3" height="12"/></svg><span id="musicLbl">Nasheed</span></button>
 
@@ -329,24 +325,14 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
       requestAnimationFrame(f)})();
   }
 
-  /* nasheed: official YouTube player (visible mini player), nasheed.mp3 as fallback */
-  const VID='ivrumxRUz_Y';
-  const fb=new Audio('nasheed.mp3');fb.loop=true;fb.preload='none';
-  let yt=null,ytReady=false,ytPlaying=false,want=false;const mb=$('music'),ml=$('musicLbl');
+  /* nasheed: nasheed.mp3 next to this page, loops */
+  const audio=new Audio('nasheed.mp3');audio.loop=true;audio.preload='auto';
+  let want=false;const mb=$('music'),ml=$('musicLbl');
   function setUI(on){mb.classList.toggle('off',!on);ml.textContent=on?'Nasheed':'Play nasheed';mb.setAttribute('aria-label',on?'Pause nasheed':'Play nasheed')}
-  function fbPlay(){fb.play().then(()=>setUI(true)).catch(()=>setUI(false))}
-  window.onYouTubeIframeAPIReady=function(){
-    yt=new YT.Player('ytp',{videoId:VID,width:'100%',height:'100%',
-      playerVars:{autoplay:0,controls:1,loop:1,playlist:VID,playsinline:1,rel:0,modestbranding:1},
-      events:{onReady:()=>{ytReady=true;if(want)yt.playVideo()},
-        onStateChange:e=>{ytPlaying=e.data===1;if(e.data===1){fb.pause();want=true;setUI(true)}else if(e.data===2&&!want){setUI(false)}},
-        onError:()=>{ytReady=false;$('ytbox').style.display='none';if(want)fbPlay()}}});
-  };
-  (function(){const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';s.onerror=()=>{$('ytbox').style.display='none'};document.head.appendChild(s)})();
-  function play(){want=true;if(ytReady){yt.playVideo()}setTimeout(()=>{if(want&&!ytPlaying&&fb.paused)fbPlay()},3500)}
-  function pause(){want=false;if(ytReady)yt.pauseVideo();fb.pause();setUI(false)}
-  mb.addEventListener('click',()=>{(ytPlaying||!fb.paused)?pause():play()});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&want){if(ytReady&&!ytPlaying&&fb.paused)yt.playVideo()}});
+  function play(){want=true;audio.play().then(()=>setUI(true)).catch(()=>setUI(false))}
+  function pause(){want=false;audio.pause();setUI(false)}
+  mb.addEventListener('click',()=>{audio.paused?play():pause()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&want&&audio.paused)audio.play().catch(()=>{})});
 
   /* open */
   let opened=false;
