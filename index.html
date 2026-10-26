@@ -24,45 +24,46 @@ body.locked{overflow:hidden;height:100%}
 .caps{font-family:Cinzel,"Trajan Pro",Georgia,serif;letter-spacing:.06em}
 .ar{font-family:Amiri,"Traditional Arabic",serif;direction:rtl}
 
-/* ============ COVER (gate-fold card) ============ */
-#cover{position:fixed;inset:0;z-index:50;perspective:1800px;background:transparent;transition:visibility 0s 2.6s}
-#cover.open{visibility:hidden}
-.door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;background-color:#fffdf7;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  transition:transform 1.9s cubic-bezier(.6,0,.2,1) .25s,box-shadow 1.9s;box-shadow:0 0 40px rgba(80,60,30,.15)}
-.door.l{left:0;transform-origin:left center;border-right:1px solid rgba(176,141,74,.35)}
-.door.r{right:0;transform-origin:right center}
-#cover.open .door.l{transform:rotateY(-105deg)}
-#cover.open .door.r{transform:rotateY(105deg)}
-.door .st{position:absolute;inset:14px;border:1.4px dashed var(--gold)}
-.door.l .st{right:-2px;border-right:none}.door.r .st{left:-2px;border-left:none}
-.door .st2{position:absolute;inset:20px;border:.6px solid rgba(176,141,74,.5)}
-.door.l .st2{right:-2px;border-right:none}.door.r .st2{left:-2px;border-left:none}
-.bq{position:absolute;width:min(46vw,230px);height:auto}
-.bq.tl{top:4px;left:4px}.bq.bl{bottom:4px;left:4px;transform:scaleY(-1)}
-.bq.tr{top:4px;right:4px;transform:scaleX(-1)}.bq.br{bottom:4px;right:4px;transform:scale(-1)}
-.face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2;padding:2rem;transition:opacity .5s}
-#cover.open .face{opacity:0}
-.arch{position:relative;width:min(76vw,330px);padding:4.2rem 1.4rem 2.2rem;border:1.2px solid var(--gold);border-radius:170px 170px 6px 6px;outline:1px solid rgba(176,141,74,.4);outline-offset:6px;background:rgba(255,253,247,.7)}
-.arch .ar{font-size:1.15rem;color:var(--soft)}
-.arch .big{font-size:clamp(3.6rem,17vw,4.6rem);line-height:1;margin:.6rem 0 .2rem}
-.arch .who{font-size:clamp(1.8rem,8vw,2.2rem);line-height:1.2}
-.arch .when{font:500 .8rem Cinzel,Georgia,serif;letter-spacing:.14em;margin-top:.9rem;color:var(--soft)}
-.arch .rule{width:70px;height:1px;background:var(--gold);margin:.9rem auto 0}
-.seal{position:relative;margin-top:-34px;width:82px;height:82px;border:none;border-radius:50%;cursor:pointer;z-index:3;
-  background:radial-gradient(circle at 34% 28%,#e3c27a,#b38b40 52%,#7e5c22);color:#fff8e6;display:grid;place-items:center;
-  box-shadow:0 3px 0 #6b4e1c,0 10px 22px rgba(80,55,20,.35),inset 0 0 0 5px rgba(255,240,200,.35),inset 0 0 0 7px rgba(110,80,30,.25);transition:transform .4s}
-.seal span{font-size:2.5rem;line-height:1;margin-top:6px;text-shadow:0 1px 0 rgba(0,0,0,.3)}
-.seal::before,.seal::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px solid var(--gold);animation:ring 2.2s ease-out infinite;pointer-events:none}
-.seal::after{animation-delay:1.1s}
-@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(1.6);opacity:0}}
-.seal:hover{transform:scale(1.07)}
-.seal:focus-visible{outline:2px solid var(--gold);outline-offset:12px}
-.tap{margin-top:1.6rem;display:inline-flex;align-items:center;gap:.55rem;background:var(--ink);color:#fff;border:none;border-radius:999px;padding:.85rem 1.7rem;cursor:pointer;
-  font:500 .85rem Cinzel,Georgia,serif;letter-spacing:.12em;box-shadow:0 12px 22px -10px rgba(0,0,0,.5);animation:nudge 1.8s ease-in-out infinite}
-.tap svg{width:16px;height:16px}
+/* ============ COVER (fabric drape) ============ */
+#cover{position:fixed;inset:0;z-index:50;display:flex;justify-content:center;transition:visibility 0s 2.6s}
+#cover::before{content:"";position:absolute;inset:0;background:#ecdcd0 radial-gradient(ellipse at 50% 40%,#f5e9e1,#e2cbbd);transition:opacity .5s}
+#cover.open{visibility:hidden}#cover.open::before{opacity:0}
+.stage{position:relative;width:min(100vw,460px);height:100%;overflow:hidden}
+.panel{position:absolute;top:0;bottom:0;width:50.5%;z-index:1;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .2 0 0 0 0 .15 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(90deg,rgba(255,240,232,.30) 0,rgba(255,240,232,.05) 9px,rgba(110,60,52,.16) 18px,rgba(255,240,232,.05) 27px,rgba(255,240,232,.30) 36px),
+    linear-gradient(#d9b2a2,#cfa492 60%,#c99c8a);
+  transition:transform 2s cubic-bezier(.65,0,.25,1) .15s,filter 2s}
+.panel.l{left:0;transform-origin:left center;box-shadow:inset -14px 0 22px -12px rgba(80,40,35,.45)}
+.panel.r{right:0;transform-origin:right center;box-shadow:inset 14px 0 22px -12px rgba(80,40,35,.45)}
+#cover.open .panel.l{transform:translateX(-62%) scaleX(.42)}
+#cover.open .panel.r{transform:translateX(62%) scaleX(.42)}
+.pearls{position:absolute;top:0;bottom:0;width:13px;background:radial-gradient(circle at 50% 45%,#fffdf9 0 1.6px,#f2e4d6 2.6px,#cdb298 4.6px,rgba(120,80,60,.35) 5.6px,transparent 6.2px) 0 0/13px 12px repeat-y}
+.lace{position:absolute;top:0;bottom:0;width:10px;background:radial-gradient(circle at 0 50%,transparent 3px,#e9cfa3 3.6px,#c9a56b 4.6px,transparent 5.4px) 0 0/10px 10px repeat-y;opacity:.9}
+.panel.l .pearls.o{left:6px}.panel.l .lace.o{left:19px}
+.panel.r .pearls.o{right:6px}.panel.r .lace.o{right:19px;transform:scaleX(-1)}
+.panel.l .pearls.i{right:4px}.panel.r .pearls.i{left:4px}
+.swag{position:absolute;left:0;right:0;top:-2px;z-index:2;width:100%;height:auto;pointer-events:none;transition:transform 1.6s cubic-bezier(.65,0,.25,1) .1s}
+#cover.open .swag{transform:translateY(-110%)}
+.bow{position:absolute;left:50%;top:clamp(70px,13vh,120px);transform:translateX(-50%);width:96px;z-index:3;transition:opacity .5s}
+.sprays{position:absolute;left:0;right:0;top:50%;transform:translateY(-46%);height:330px;z-index:3;pointer-events:none;transition:opacity .6s}
+.spray{position:absolute;top:0;height:330px;width:120px}
+.spray.l{left:max(4px,calc(50% - 205px))}.spray.r{right:max(4px,calc(50% - 205px));transform:scaleX(-1)}
+.medal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:200px;z-index:4;border:none;background:none;cursor:pointer;padding:0;transition:transform 1s cubic-bezier(.6,0,.2,1),opacity .7s}
+.medal svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 10px rgba(70,35,30,.35))}
+.medal .mono{position:absolute;inset:0;display:grid;place-items:center;font-family:"Great Vibes",cursive;font-size:3.3rem;color:#a2566a;text-shadow:0 1px 0 rgba(255,255,255,.6);letter-spacing:.02em;padding-top:4px}
+.medal:focus-visible{outline:2px dashed #fff;outline-offset:6px}
+#cover.open .medal{transform:translate(-50%,-50%) scale(.6);opacity:0}
+#cover.open .bow,#cover.open .sprays,#cover.open .tapwrap{opacity:0}
+.tapwrap{position:absolute;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom,0px));z-index:5;text-align:center;transition:opacity .5s}
+.tap{display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1.6rem;border-radius:999px;cursor:pointer;
+  background:linear-gradient(#fbf1ec,#f0ddd5);color:#7c4a4f;border:1.5px dashed #c48f8a;outline:4px solid rgba(251,241,236,.75);
+  font:500 .9rem Cinzel,Georgia,serif;letter-spacing:.16em;box-shadow:0 10px 24px -8px rgba(60,25,25,.55);animation:nudge 2s ease-in-out infinite}
+.tap svg{width:24px;height:14px}
 @keyframes nudge{50%{transform:translateY(-5px)}}
-.soundnote{margin-top:.7rem;color:var(--soft);font-style:italic;font-size:.95rem}
+.soundnote{margin-top:.8rem;color:#fff6f1;font-style:italic;font-size:.95rem;text-shadow:0 1px 4px rgba(60,25,25,.6)}
+@media (min-width:600px){.stage{box-shadow:0 0 60px rgba(0,0,0,.5)}}
 
 /* ============ PAGE ============ */
 main{max-width:560px;margin:0 auto;padding:2.2rem 1rem 6rem}
@@ -174,19 +175,72 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
 </svg>
 
 <div id="cover" role="dialog" aria-label="Invitation cover">
-  <div class="door l"><div class="st"></div><div class="st2"></div><svg class="bq tl" viewBox="0 0 230 230" aria-hidden="true"><use href="#bouquet"/></svg><svg class="bq bl" viewBox="0 0 230 230" aria-hidden="true"><use href="#bouquet"/></svg></div>
-  <div class="door r"><div class="st"></div><div class="st2"></div><svg class="bq tr" viewBox="0 0 230 230" aria-hidden="true"><use href="#bouquet"/></svg><svg class="bq br" viewBox="0 0 230 230" aria-hidden="true"><use href="#bouquet"/></svg></div>
-  <div class="face">
-    <div class="arch">
-      <div class="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-      <div class="big script goldtext">Walima</div>
-      <div class="who script">Ubaid ur Rehman</div>
-      <div class="when">Saturday · 07 Nov 2026</div>
-      <div class="rule"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <radialGradient id="pearl" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fffefa"/><stop offset=".5" stop-color="#efe1d1"/><stop offset="1" stop-color="#bfa186"/></radialGradient>
+    <pattern id="linen" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#efe0d3"/><path d="M0 1H6M0 4H6" stroke="#e2cdbd" stroke-width=".7"/><path d="M1 0V6M4 0V6" stroke="#e8d6c8" stroke-width=".5"/></pattern>
+    <symbol id="rose" viewBox="-32 -32 64 64">
+    <g stroke="#a8645f" stroke-width=".9" stroke-dasharray="1.6 1.1">
+      <g fill="#e7b3aa"><ellipse rx="13" ry="10" transform="rotate(0) translate(0 -14)"/><ellipse rx="13" ry="10" transform="rotate(72) translate(0 -14)"/><ellipse rx="13" ry="10" transform="rotate(144) translate(0 -14)"/><ellipse rx="13" ry="10" transform="rotate(216) translate(0 -14)"/><ellipse rx="13" ry="10" transform="rotate(288) translate(0 -14)"/></g>
+      <g fill="#dc9a92"><ellipse rx="10" ry="8" transform="rotate(36) translate(0 -8)"/><ellipse rx="10" ry="8" transform="rotate(108) translate(0 -8)"/><ellipse rx="10" ry="8" transform="rotate(180) translate(0 -8)"/><ellipse rx="10" ry="8" transform="rotate(252) translate(0 -8)"/><ellipse rx="10" ry="8" transform="rotate(324) translate(0 -8)"/></g>
+      <circle r="7" fill="#c98078"/>
+    </g>
+    <path d="M-4 0 a4 4 0 1 1 6 3 a6 6 0 1 1 -8 -7" fill="none" stroke="#8e4d49" stroke-width="1.1"/>
+  </symbol>
+  <symbol id="leaf" viewBox="0 -9 30 18"><path d="M0 0 Q13 -9 29 0 Q13 9 0 0Z" fill="#9aa886" stroke="#5f6d50" stroke-width=".9" stroke-dasharray="1.5 1"/><path d="M1 0 H26" stroke="#6b7a5b" stroke-width=".8"/></symbol>
+  <symbol id="bud" viewBox="-6 -9 12 18"><path d="M0 -8 Q6 -2 0 8 Q-6 -2 0 -8Z" fill="#e2a69e" stroke="#a8645f" stroke-width=".8" stroke-dasharray="1.4 1"/></symbol>
+  <symbol id="dspray" viewBox="0 0 120 330">
+    <path d="M70 320 C55 260 40 220 52 165 C62 120 48 70 30 20" fill="none" stroke="#7b8a66" stroke-width="2" stroke-dasharray="3 1.5"/>
+    <path d="M52 165 C75 150 85 120 96 95" fill="none" stroke="#7b8a66" stroke-width="1.6" stroke-dasharray="3 1.5"/>
+    <path d="M55 215 C30 205 18 190 8 175" fill="none" stroke="#7b8a66" stroke-width="1.6" stroke-dasharray="3 1.5"/>
+    <use href="#leaf" x="54" y="235" width="34" height="20" transform="rotate(-30 54 245)"/>
+    <use href="#leaf" x="20" y="250" width="34" height="20" transform="rotate(200 37 260)"/>
+    <use href="#leaf" x="60" y="125" width="30" height="18" transform="rotate(-55 60 134)"/>
+    <use href="#leaf" x="18" y="120" width="30" height="18" transform="rotate(230 33 129)"/>
+    <use href="#leaf" x="36" y="60" width="28" height="16" transform="rotate(-70 36 68)"/>
+    <use href="#leaf" x="70" y="280" width="30" height="18" transform="rotate(-10 70 289)"/>
+    <use href="#rose" x="22" y="140" width="64" height="64"/>
+    <use href="#rose" x="70" y="72" width="40" height="40"/>
+    <use href="#rose" x="-4" y="160" width="36" height="36"/>
+    <use href="#bud" x="22" y="10" width="14" height="22" transform="rotate(-20 29 21)"/>
+    <use href="#bud" x="90" y="80" width="12" height="18"/>
+    <use href="#bud" x="40" y="290" width="12" height="18" transform="rotate(25 46 299)"/>
+    <g fill="#f6e3da" stroke="#c49a8f" stroke-width=".6"><circle cx="40" cy="45" r="3"/><circle cx="46" cy="40" r="2.6"/><circle cx="90" cy="130" r="2.6"/><circle cx="20" cy="225" r="3"/><circle cx="85" cy="250" r="2.6"/><circle cx="62" cy="300" r="2.6"/></g>
+  </symbol>
+  </defs></svg>
+  <div class="stage">
+    <div class="panel l"><div class="pearls o"></div><div class="lace o"></div><div class="pearls i"></div></div>
+    <div class="panel r"><div class="pearls o"></div><div class="lace o"></div><div class="pearls i"></div></div>
+    <svg class="swag" viewBox="0 0 460 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H460 V26 C390 110 300 118 230 70 C160 118 70 110 0 26Z" fill="#d6ab9a"/>
+      <path d="M0 26 C70 110 160 118 230 70 C300 118 390 110 460 26" fill="none" stroke="#c9a56b" stroke-width="2.4" stroke-dasharray="1 5" stroke-linecap="round"/>
+      <path d="M0 18 C80 92 160 100 230 58 C300 100 380 92 460 18" fill="none" stroke="rgba(110,60,52,.25)" stroke-width="5"/>
+      <path d="M0 8 C80 70 160 80 230 44 C300 80 380 70 460 8" fill="none" stroke="rgba(255,240,232,.35)" stroke-width="6"/>
+      <path d="M0 32 C70 116 160 124 230 76 C300 124 390 116 460 32" fill="none" stroke="#f3e6d8" stroke-width="5" stroke-dasharray=".1 9" stroke-linecap="round"/>
+    </svg>
+    <svg class="bow" viewBox="0 0 80 110" aria-hidden="true">
+      <g fill="#ecd3c6" stroke="#b98a7c" stroke-width="1.1" stroke-dasharray="2 1.2">
+        <path d="M40 14 C26 0 6 2 8 14 C10 26 30 22 40 14Z"/><path d="M40 14 C54 0 74 2 72 14 C70 26 50 22 40 14Z"/>
+        <path d="M37 16 L26 44 L32 42 L38 18Z"/><path d="M43 16 L54 44 L48 42 L42 18Z"/>
+      </g>
+      <circle cx="40" cy="14" r="5" fill="#e2c2b4" stroke="#b98a7c"/>
+      <path d="M40 19 V84" stroke="#c9a56b" stroke-width="1.2"/>
+      <g fill="url(#pearl)"><circle cx="40" cy="30" r="2.6"/><circle cx="40" cy="40" r="2.6"/><circle cx="40" cy="50" r="2.6"/><circle cx="40" cy="60" r="2.6"/><circle cx="40" cy="70" r="2.6"/><circle cx="40" cy="90" r="9"/></g>
+      <path d="M40 80 V82" stroke="#c9a56b" stroke-width="2"/>
+    </svg>
+    <div class="sprays" aria-hidden="true"><svg class="spray l" viewBox="0 0 120 330"><use href="#dspray" width="120" height="330"/></svg><svg class="spray r" viewBox="0 0 120 330"><use href="#dspray" width="120" height="330"/></svg></div>
+    <button class="medal" id="seal" aria-label="Open invitation">
+      <svg viewBox="-100 -120 200 240" aria-hidden="true">
+        <path d="M0.0 -98.0 Q20.9 -111.1 33.8 -88.3 Q58.6 -89.1 61.0 -61.1 Q84.7 -49.5 76.0 -21.8 Q94.0 0.0 76.0 21.8 Q84.7 49.5 61.0 61.1 Q58.6 89.1 33.8 88.3 Q20.9 111.1 0.0 98.0 Q-20.9 111.1 -33.8 88.3 Q-58.6 89.1 -61.0 61.1 Q-84.7 49.5 -76.0 21.8 Q-94.0 0.0 -76.0 -21.8 Q-84.7 -49.5 -61.0 -61.1 Q-58.6 -89.1 -33.8 -88.3 Q-20.9 -111.1 -0.0 -98.0Z" fill="url(#linen)" stroke="#c9a56b" stroke-width="2.2"/>
+        <path d="M0.0 -88.0 Q17.8 -97.5 29.5 -79.3 Q49.9 -78.2 53.2 -54.9 Q72.1 -43.4 66.3 -19.6 Q80.0 0.0 66.3 19.6 Q72.1 43.4 53.2 54.9 Q49.9 78.2 29.5 79.3 Q17.8 97.5 0.0 88.0 Q-17.8 97.5 -29.5 79.3 Q-49.9 78.2 -53.2 54.9 Q-72.1 43.4 -66.3 19.6 Q-80.0 0.0 -66.3 -19.6 Q-72.1 -43.4 -53.2 -54.9 Q-49.9 -78.2 -29.5 -79.3 Q-17.8 -97.5 -0.0 -88.0Z" fill="none" stroke="#b98a7c" stroke-width="1.2" stroke-dasharray="3 2.2"/>
+        <circle cx="0.0" cy="-98.0" r="3.6" fill="url(#pearl)"/><circle cx="33.8" cy="-88.3" r="3.6" fill="url(#pearl)"/><circle cx="61.0" cy="-61.1" r="3.6" fill="url(#pearl)"/><circle cx="76.0" cy="-21.8" r="3.6" fill="url(#pearl)"/><circle cx="76.0" cy="21.8" r="3.6" fill="url(#pearl)"/><circle cx="61.0" cy="61.1" r="3.6" fill="url(#pearl)"/><circle cx="33.8" cy="88.3" r="3.6" fill="url(#pearl)"/><circle cx="0.0" cy="98.0" r="3.6" fill="url(#pearl)"/><circle cx="-33.8" cy="88.3" r="3.6" fill="url(#pearl)"/><circle cx="-61.0" cy="61.1" r="3.6" fill="url(#pearl)"/><circle cx="-76.0" cy="21.8" r="3.6" fill="url(#pearl)"/><circle cx="-76.0" cy="-21.8" r="3.6" fill="url(#pearl)"/><circle cx="-61.0" cy="-61.1" r="3.6" fill="url(#pearl)"/><circle cx="-33.8" cy="-88.3" r="3.6" fill="url(#pearl)"/>
+        <circle cx="0" cy="-104" r="6" fill="url(#pearl)"/><circle cx="0" cy="104" r="6" fill="url(#pearl)"/>
+      </svg>
+      <span class="mono">U &amp; K</span>
+    </button>
+    <div class="tapwrap">
+      <button class="tap" id="tapBtn"><svg viewBox="0 0 24 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 7 C8 1 2 1 2 5 C2 9 8 9 12 7Z M12 7 C16 1 22 1 22 5 C22 9 16 9 12 7Z M12 7 L8 13 M12 7 L16 13"/></svg>Tap to open</button>
+      <div class="soundnote">Sound on for the nasheed</div>
     </div>
-    <button class="seal" id="seal" aria-label="Open invitation"><span class="script">U</span></button>
-    <button class="tap" id="tapBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5a2 2 0 0 1 4 0v6"/><path d="M13 10.5V9a2 2 0 0 1 4 0v3.5"/><path d="M17 12a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.6-2.8L4 15.5a2 2 0 0 1 3-2.6L9 15"/></svg>Tap to open</button>
-    <div class="soundnote">Sound on for the nasheed</div>
   </div>
 </div>
 
@@ -196,7 +250,7 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
 
 <main>
   <article class="sheet" id="first">
-    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
     <div class="ar bism rv d1">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
     <div class="ar hamd rv d2">ٱلْحَمْدُ لِلَّٰهِ</div>
     <h1 class="name script rv d3">Ubaid ur Rehman</h1>
@@ -204,12 +258,12 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
     <p class="amp rv d4">&amp;</p>
     <h2 class="name2 script rv d4">Daughter of Abdul Rauf</h2>
     <p class="msg rv d5">Are Beginning Their Beautiful Journey Of Marriage. Your Gracious Presence On This Joyous Occasion Will Be A Cherished Honour And Blessing For Our Family.</p>
-    <svg class="flor bot rv d6" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor bot rv d6" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
     <a class="scrollcue rv d6" href="#event">Scroll<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </article>
 
   <article class="sheet" id="event">
-    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
     <div class="sectTitle script rv d1">Walima Event</div>
     <div class="ar insha rv d1">ان شاء الله</div>
     <div class="date rv d2"><div class="side">On Saturday</div><div class="day">07</div><div class="side">Nov. 2026</div></div>
@@ -225,7 +279,7 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
   </article>
 
   <article class="sheet" id="venue">
-    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
     <div class="venueLine caps rv d1">Venue: Bait-e-Ahmad</div>
     <p class="addr caps rv d2">Street No. 2, Haider Town, Defence Road, Sialkot.</p>
     <div class="btns rv d3">
@@ -235,7 +289,7 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
   </article>
 
   <article class="sheet">
-    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor top rv" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
     <p class="closing rv d1">We look forward to your gracious presence.</p>
     <p class="compl caps rv d2">With compliments from the family:</p>
     <p class="family caps rv d3">Sufi Ghulam Qadir (Late).</p>
@@ -244,7 +298,7 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
       <a class="btn line" href="tel:+923006168897"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>0300-6168897</a>
       <a class="btn line" href="tel:+923006113113"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>0300-6113113</a>
     </div>
-    <svg class="flor bot rv d5" viewBox="0 0 150 46"><use href="#spray"/></svg>
+    <svg class="flor bot rv d5" viewBox="0 0 150 46"><use href="#dspray" width="120" height="330"/></svg>
   </article>
   <div class="foot ar rv">جزاكم الله خيرا</div>
 </main>
@@ -299,7 +353,7 @@ body.ready #ytbox{opacity:1;pointer-events:auto}
   function openInvite(){
     if(opened)return;opened=true;play();
     $('cover').classList.add('open');
-    setTimeout(()=>{document.body.classList.remove('locked');document.body.classList.add('ready');observe();petals()},1300);
+    setTimeout(()=>{document.body.classList.remove('locked');document.body.classList.add('ready');observe();petals()},1700);
   }
   $('seal').addEventListener('click',openInvite);$('tapBtn').addEventListener('click',openInvite);
 })();
